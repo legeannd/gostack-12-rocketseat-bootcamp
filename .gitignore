@@ -86,3 +86,5 @@ typings/
 
 # DynamoDB Local files
 .dynamodb/
+
+Nível 01/Aulas/backend/yarn.lock
