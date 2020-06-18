@@ -4,7 +4,7 @@ Este repositório é dedicado às aulas e desafios realizados durante o Bootcamp
 
 Durante o bootcamp foram utilizadas as ferramentas NodeJS, ReactJS e React Native, além de bibliotecas variadas que foram necessárias para realizar determinadas funções.
 
-O foco do bootcamp foi abordar a linguagem Typescript, um superset da linguagem Javascript. 
+A principal linguagem abordada durante o bootcamp foi Typescript, um superset da linguagem Javascript. 
 
 ### Autor:
 

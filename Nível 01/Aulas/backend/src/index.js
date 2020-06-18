@@ -1,10 +1,12 @@
 //Requisição do Express, utilizado para manipular as rotas criadas na aplicação, e do UUID, utilizado para criar um ID único para os cadastros
 
 const express = require('express');
+const cors = require('cors');
 const { uuid, isUuid } = require('uuidv4');
 
 const app = express();
 
+app.use(cors());
 app.use(express.json());
 
 const projects = [];
@@ -69,7 +71,7 @@ app.put('/projects/:id', (request, response) => {
   const projectIndex = projects.findIndex(project => project.id === id);
 
   if (projectIndex < 0) {
-    return response.status(400).json({error: 'Project not found.'})
+    return response.status(400).json({error: 'Project not found.'});
   }
 
   const project = {
