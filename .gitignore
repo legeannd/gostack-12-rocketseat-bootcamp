@@ -88,3 +88,7 @@ typings/
 .dynamodb/
 
 Nível 01/Aulas/backend/yarn.lock
+
+*.lock
+
+nivel-01/aulas/mobile/package-lock.json
