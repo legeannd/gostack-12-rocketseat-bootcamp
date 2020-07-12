@@ -21,18 +21,16 @@ const SignUp: React.FC = () => {
 
       const schema = Yup.object().shape({
         name: Yup.string().required('Nome obrigatório'),
-        email: Yup.string().required('E-mail obrigatório').email('Digite um e-mail válido'),
+        email: Yup.string()
+          .required('E-mail obrigatório')
+          .email('Digite um e-mail válido'),
         password: Yup.string().min(6, 'No mínimo 6 dígitos'),
       });
 
       await schema.validate(data, {
         abortEarly: false,
       });
-
-
     } catch (err) {
-      console.log(err);
-
       const errors = getValidationErrors(err);
 
       formRef.current?.setErrors(errors);
@@ -41,33 +39,32 @@ const SignUp: React.FC = () => {
 
   return (
     <Container>
-    <Background />
-    <Content>
-      <img src={logoImg} alt="GoBarber" />
+      <Background />
+      <Content>
+        <img src={logoImg} alt="GoBarber" />
 
-      <Form ref={formRef} onSubmit={handleSubmit}>
-        <h1>Faça seu cadastro</h1>
+        <Form ref={formRef} onSubmit={handleSubmit}>
+          <h1>Faça seu cadastro</h1>
 
-        <Input name="name" icon={FiUser} placeholder="Nome" />
-        <Input name="email" icon={FiMail} placeholder="E-mail" />
-        <Input
-          name="password"
-          icon={FiLock}
-          type="password"
-          placeholder="senha"
-        />
+          <Input name="name" icon={FiUser} placeholder="Nome" />
+          <Input name="email" icon={FiMail} placeholder="E-mail" />
+          <Input
+            name="password"
+            icon={FiLock}
+            type="password"
+            placeholder="senha"
+          />
 
-        <Button type="submit">Cadastrar</Button>
+          <Button type="submit">Cadastrar</Button>
+        </Form>
 
-      </Form>
-
-      <a href="login">
-        <FiArrowLeft />
-        Voltar para logon
-      </a>
-    </Content>
-  </Container>
-  )
+        <a href="login">
+          <FiArrowLeft />
+          Voltar para logon
+        </a>
+      </Content>
+    </Container>
+  );
 };
 
 export default SignUp;

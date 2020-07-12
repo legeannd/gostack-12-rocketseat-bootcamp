@@ -23,7 +23,7 @@ class AuthenticateUserService {
     const usersRepository = getRepository(User);
 
     const user = await usersRepository.findOne({
-      where: { email }
+      where: { email },
     });
 
     if (!user) {
@@ -41,7 +41,7 @@ class AuthenticateUserService {
     const token = sign({}, secret, {
       subject: user.id,
       expiresIn,
-    })
+    });
 
     return {
       user,
