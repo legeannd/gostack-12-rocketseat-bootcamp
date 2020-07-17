@@ -28,6 +28,7 @@
       "@typescript-eslint/camelcase": "off",
       "camelcase":"off",
       "import/no-unresolved": "off",
+      "no-useless-constructor": "off",
       "@typescript-eslint/no-unused-vars": ["error", {
         "argsIgnorePattern": "_"
       }],
