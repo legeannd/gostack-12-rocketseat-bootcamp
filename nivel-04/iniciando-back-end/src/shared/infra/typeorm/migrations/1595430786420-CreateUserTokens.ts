@@ -1,4 +1,4 @@
-import { MigrationInterface, QueryRunner, TableUnique, Table } from 'typeorm';
+import { MigrationInterface, QueryRunner, Table } from 'typeorm';
 
 export default class CreateUserTokens1595430786420
   implements MigrationInterface {
