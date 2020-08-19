@@ -1,7 +1,9 @@
 import React, { useCallback, useEffect, useState } from 'react';
 import { useRoute, useNavigation } from '@react-navigation/native';
 import Icon from 'react-native-vector-icons/Feather';
+import { Image } from 'react-native';
 import api from '../../services/api';
+import defaultUserIcon from '../../assets/default-user.png';
 
 import {
   Container,
@@ -11,6 +13,9 @@ import {
   UserAvatar,
   ProvidersList,
   ProvidersListContainer,
+  ProviderContainer,
+  ProviderAvatar,
+  ProviderName,
 } from './styles';
 import { useAuth } from '../../hooks/auth';
 
@@ -25,11 +30,14 @@ export interface Provider {
 }
 
 const CreateAppointment: React.FC = () => {
-  const [providers, setProviders] = useState<Provider[]>([]);
   const { user } = useAuth();
   const route = useRoute();
+  const routeParams = route.params as RouteParams;
   const { goBack } = useNavigation();
-  const { providerId } = route.params as RouteParams;
+  const [providers, setProviders] = useState<Provider[]>([]);
+  const [selectedProvider, setSelectedProvider] = useState(
+    routeParams.providerId,
+  );
 
   useEffect(() => {
     api.get('providers').then(response => {
@@ -37,9 +45,26 @@ const CreateAppointment: React.FC = () => {
     });
   }, []);
 
+  const handleUserIcon = useCallback(
+    (id: string) => {
+      const currentProvider = providers.find(provider => provider.id === id);
+      if (currentProvider?.avatar_url === null) {
+        const defaultUserIconUri = Image.resolveAssetSource(defaultUserIcon)
+          .uri;
+        return defaultUserIconUri;
+      }
+      return currentProvider?.avatar_url;
+    },
+    [providers],
+  );
+
   const navigateBack = useCallback(() => {
     goBack();
   }, [goBack]);
+
+  const handleSelectProvider = useCallback((providerId: string) => {
+    setSelectedProvider(providerId);
+  }, []);
 
   return (
     <Container>
@@ -60,7 +85,15 @@ const CreateAppointment: React.FC = () => {
           data={providers}
           keyExtractor={provider => provider.id}
           renderItem={({ item: provider }) => (
-            <HeaderTitle>{provider.name}</HeaderTitle>
+            <ProviderContainer
+              onPress={() => handleSelectProvider(provider.id)}
+              selected={provider.id === selectedProvider}
+            >
+              <ProviderAvatar source={{ uri: handleUserIcon(provider.id) }} />
+              <ProviderName selected={provider.id === selectedProvider}>
+                {provider.name}
+              </ProviderName>
+            </ProviderContainer>
           )}
         />
       </ProvidersListContainer>
