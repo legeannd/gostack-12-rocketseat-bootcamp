@@ -85,7 +85,7 @@ const CreateAppointment: React.FC = () => {
       });
   }, [selectedDate, selectedProvider]);
 
-  const handleUserIcon = useCallback(
+  const handleUserAvatar = useCallback(
     (id: string) => {
       const currentProvider = providers.find(provider => provider.id === id);
       if (currentProvider?.avatar_url === null) {
@@ -195,7 +195,9 @@ const CreateAppointment: React.FC = () => {
                 onPress={() => handleSelectProvider(provider.id)}
                 selected={provider.id === selectedProvider}
               >
-                <ProviderAvatar source={{ uri: handleUserIcon(provider.id) }} />
+                <ProviderAvatar
+                  source={{ uri: handleUserAvatar(provider.id) }}
+                />
                 <ProviderName selected={provider.id === selectedProvider}>
                   {provider.name}
                 </ProviderName>
