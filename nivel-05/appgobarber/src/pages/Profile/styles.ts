@@ -5,6 +5,7 @@ export const Container = styled.View`
   flex: 1;
   justify-content: center;
   padding: 0 30px ${Platform.OS === 'android' ? 120 : 40}px;
+  position: relative;
 `;
 
 export const Title = styled.Text`
@@ -18,6 +19,12 @@ export const BackButton = styled.TouchableOpacity`
   position: absolute;
   top: 64px;
   left: 24px;
+`;
+
+export const SignOutButton = styled.TouchableOpacity`
+  position: absolute;
+  top: 64px;
+  right: 24px;
 `;
 
 export const UserAvatarButton = styled.TouchableOpacity``;
